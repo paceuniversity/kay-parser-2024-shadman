@@ -18,7 +18,15 @@ jobs:
       uses: classroom-resources/autograding-command-grader@v1
       with:
         test-name: Parser Tests
-    
+        
+        command: gradle test
+        timeout: 10
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        PARSER-TESTS_RESULTS: "${{steps.parser-tests.outputs.result}}"
+      with:
+        runners: parser-tests
         command: gradle test
         timeout: 10
     - name: Autograding Reporter
